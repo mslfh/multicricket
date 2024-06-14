@@ -32,9 +32,12 @@ dependencies:
     sdk: flutter
   provider: any
   # Add the dependency for the Firebase Core Flutter SDK
-  firebase_core:
+  firebase_app_check:
+  camera:
   cloud_firestore:
-  json_annotation: ^4.0.1
+  firebase_storage:
+  firebase_core:
+  http: any
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
@@ -60,7 +63,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
+  assets:
+    - images/player_default.png
+    - images/team_default.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

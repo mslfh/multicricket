@@ -48,7 +48,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCDWroxln5aDwJmZi8r_uMxw-gkItl4Ecg',
-    appId: '1:86951492174:android:a2e2687e04ac69b333211f',
+    appId: '1:86951492174:android:7d66b7af190ffb9033211f',
     messagingSenderId: '86951492174',
     projectId: 'kit712assignment',
     storageBucket: 'kit712assignment.appspot.com',
@@ -56,7 +56,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAXhkL6ohXxkIwJmYJ6TVRCKB3G7J20RdA',
-    appId: '1:86951492174:ios:4e996b4a6a208f0733211f',
+    appId: '1:86951492174:ios:76db4b37cbd9c0d333211f',
     messagingSenderId: '86951492174',
     projectId: 'kit712assignment',
     storageBucket: 'kit712assignment.appspot.com',
@@ -65,7 +65,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyApjkldl2VQPaiV_BsvasnQuUSFlKxR65o',
-    appId: '1:86951492174:web:17535c2765b6f3e633211f',
+    appId: '1:86951492174:web:763720aa1f8c6c3a33211f',
     messagingSenderId: '86951492174',
     projectId: 'kit712assignment',
     authDomain: 'kit712assignment.firebaseapp.com',

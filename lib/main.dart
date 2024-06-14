@@ -4,7 +4,10 @@ import 'package:multicricket/screen/match/match_list.dart';
 import 'package:multicricket/screen/player/player_list.dart';
 import 'package:multicricket/screen/team/team_list.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'model/Player.dart';
+import 'model/Team.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +26,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+        providers: [
+        ChangeNotifierProvider(create: (context) => TeamModel()),
+    ChangeNotifierProvider(create: (context) => PlayerModel()),
+    ],
+    child: MaterialApp(
       title: 'Flutter hello',
       theme: ThemeData(
         // This is the theme of your application.
@@ -45,6 +53,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    ),
     );
   }
 }

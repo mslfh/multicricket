@@ -55,7 +55,6 @@ class PlayerModel extends ChangeNotifier {
     }
     loading = false;
     notifyListeners();
-    print(loading);
   }
 
   Future addPlayer(Player player) async {

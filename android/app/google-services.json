@@ -7,7 +7,26 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86951492174:android:a2e2687e04ac69b333211f",
+        "mobilesdk_app_id": "1:86951492174:android:107649cb62eaafd533211f",
+        "android_client_info": {
+          "package_name": "au.edu.utas.multicricket"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCDWroxln5aDwJmZi8r_uMxw-gkItl4Ecg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86951492174:android:7d66b7af190ffb9033211f",
         "android_client_info": {
           "package_name": "au.edu.utas.multicricket.multicricket"
         }
@@ -26,28 +45,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:86951492174:android:4ee706ac353f12e533211f",
+        "mobilesdk_app_id": "1:86951492174:android:d215631bd8243ac133211f",
         "android_client_info": {
-          "package_name": "com.example.flutter_tutorial_3"
-        }
-      },
-      "oauth_client": [],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCDWroxln5aDwJmZi8r_uMxw-gkItl4Ecg"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": []
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:86951492174:android:fd8f3bf46113d12433211f",
-        "android_client_info": {
-          "package_name": "com.example.multicricket"
+          "package_name": "com.multicricket.app"
         }
       },
       "oauth_client": [],
