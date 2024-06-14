@@ -3,8 +3,17 @@ import 'package:multicricket/screen/history/history_list.dart';
 import 'package:multicricket/screen/match/match_list.dart';
 import 'package:multicricket/screen/player/player_list.dart';
 import 'package:multicricket/screen/team/team_list.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  var app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  print("\n\nConnected to Firebase App ${app.options.projectId}\n\n");
+
   runApp(const MyApp());
 }
 
@@ -80,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: IndexedStack(
         index: _currentTab.index,
-        children: [
+        children: const [
           MatchList(),TeamList(),PlayerList(),HistoryList()
         ],
 
