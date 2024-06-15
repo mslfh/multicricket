@@ -34,6 +34,10 @@ class PlayerModel extends ChangeNotifier {
     return players.firstWhere((player) => player.id == id);
   }
 
+  Player getPlayer(String id) {
+    return players.firstWhere((player) => player.id == id);
+  }
+
   CollectionReference playersCollection = FirebaseFirestore.instance.collection('players');
   bool loading = false;
 

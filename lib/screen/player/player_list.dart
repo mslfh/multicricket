@@ -4,29 +4,66 @@ import 'package:multicricket/screen/player/player_detail.dart';
 import '../../model/Player.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-class PlayerList extends StatelessWidget {
+
+
+class PlayerList extends StatefulWidget {
   const PlayerList({Key? key}) : super(key: key);
 
   @override
+  _PlayerListState createState() => _PlayerListState();
+}
+
+class _PlayerListState extends State<PlayerList> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
+  @override
   Widget build(BuildContext context) {
-    return  Consumer<PlayerModel>(
-        builder: (context, playerModel, child) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: const Text('Player List'),
-            ),
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  if (playerModel.loading) const CircularProgressIndicator() else
-                  Expanded(
-                    child: ListView.builder(
+    return Consumer<PlayerModel>(
+      builder: (context, playerModel, child) {
+        var players = playerModel.players;
+        if (_searchController.text.isNotEmpty) {
+          players = players.where((player) => player.name.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+        }
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+
+            title: _isSearching
+                ? TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                hintText: 'Search',
+              ),
+              onChanged: (value) {
+                setState(() {});
+              },
+            )
+                : const Text('Players'),
+            actions: [
+                IconButton(
+                  icon: Icon(_isSearching ? Icons.close : Icons.search),
+                  onPressed: () {
+                    setState(() {
+                      _isSearching = !_isSearching;
+                      if (!_isSearching) {
+                        _searchController.clear();
+                      }
+                    });
+                  },
+                ),
+
+            ],
+          ),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                if (playerModel.loading) const CircularProgressIndicator() else
+                Expanded(
+                  child: ListView.builder(
                     itemBuilder: (_, index) {
-                      var player = playerModel.players[index];
+                      var player = players[index];
                       var image = player.image64encode;
-                      print(player.image64encode);
                       return ListTile(
                         leading: image != null
                           ? FutureBuilder<String>(
@@ -36,7 +73,6 @@ class PlayerList extends StatelessWidget {
                                   return CircularProgressIndicator();
                                 }
                                 var downloadURL = snapshot.data!;
-                                print('players'+ downloadURL);
                                 return CircleAvatar(radius: 20, backgroundImage: NetworkImage(downloadURL));
                               },
                             )
@@ -47,7 +83,7 @@ class PlayerList extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => PlayerDetails(
-                                player: playerModel.players[index],
+                                player: players[index],
                                 playerModel: playerModel
                               ),
                             ),
@@ -55,14 +91,13 @@ class PlayerList extends StatelessWidget {
                         },
                       );
                     },
-                    itemCount: playerModel.players.length
+                    itemCount: players.length
                   )
-
-                  )
-                ],
-              ),
+                )
+              ],
             ),
-            floatingActionButton: FloatingActionButton(
+          ),
+          floatingActionButton: FloatingActionButton(
             onPressed: () {
               Navigator.push(
                 context,
@@ -76,8 +111,8 @@ class PlayerList extends StatelessWidget {
             child: const Icon(Icons.add),
             backgroundColor: Theme.of(context).colorScheme.primary,
           ),
-          );
-        },
+        );
+      },
     );
   }
 }

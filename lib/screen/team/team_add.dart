@@ -70,9 +70,11 @@ class _TeamAddState extends State<TeamAdd> {
       appBar: AppBar(
         title: Text('Add Team'),
       ),
-      body: Form(
-        key: _formKey,
-        child: Column(
+      body: SingleChildScrollView(
+        child:
+          Form(
+          key: _formKey,
+          child:Column(
           children: <Widget>[
             Container(
               width: 100, // Set the width
@@ -149,7 +151,7 @@ class _TeamAddState extends State<TeamAdd> {
             ]
         ),),
         SizedBox(
-          height: _selectedPlayers.length * 80 + 30,
+          height: _selectedPlayers.length * 60 + 30,
           child:
             Expanded(
               child: ListView.builder(
@@ -197,6 +199,7 @@ class _TeamAddState extends State<TeamAdd> {
             ),
           ],
         ),
+      ),
       ),
     );
 

@@ -6,6 +6,8 @@ import 'package:multicricket/screen/team/team_list.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
+import 'model/History.dart';
+import 'model/Match.dart';
 import 'model/Player.dart';
 import 'model/Team.dart';
 
@@ -29,7 +31,9 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
         ChangeNotifierProvider(create: (context) => TeamModel()),
-    ChangeNotifierProvider(create: (context) => PlayerModel()),
+        ChangeNotifierProvider(create: (context) => PlayerModel()),
+        ChangeNotifierProvider(create: (context) => MatchModel()),
+        ChangeNotifierProvider(create: (context) => HistoryModel()),
     ],
     child: MaterialApp(
       title: 'Flutter hello',

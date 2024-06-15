@@ -88,7 +88,10 @@ class _TeamDetailsState extends State<TeamDetails> {
       appBar: AppBar(
         title: Text('Team Details'),
       ),
-      body: Column(
+      body:
+    SingleChildScrollView(
+    child:
+      Column(
           children: <Widget>[
             SizedBox(
               width: 100, // Set the width
@@ -161,7 +164,7 @@ class _TeamDetailsState extends State<TeamDetails> {
             ),
             ),
       SizedBox(
-        height: _selectedPlayers.length * 80,
+        height: _selectedPlayers.length * 70,
         child:
             Expanded(
               child: ListView.builder(
@@ -224,6 +227,7 @@ class _TeamDetailsState extends State<TeamDetails> {
 
           ],
         ),
+    ),
     );
   }
 }

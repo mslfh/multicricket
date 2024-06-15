@@ -6,18 +6,53 @@ import '../../model/Team.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
-class TeamList extends StatelessWidget {
+class TeamList extends StatefulWidget {
   const TeamList({Key? key}) : super(key: key);
+
+  @override
+  _TeamListState createState() => _TeamListState();
+}
+class _TeamListState extends State<TeamList> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
 
   @override
   Widget build(BuildContext context) {
     return Consumer<TeamModel>(
-        builder: (context, teamModel, child) {
-          return Scaffold(
-            appBar: AppBar(
-              backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-              title: const Text('Team List'),
-            ),
+      builder: (context, teamModel, child) {
+        var teams = teamModel.teams;
+        if (_searchController.text.isNotEmpty) {
+          teams = teams.where((team) => team.teamName.toLowerCase().contains(_searchController.text.toLowerCase())).toList();
+        }
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            title: _isSearching
+                ? TextField(
+              controller: _searchController,
+              decoration: const InputDecoration(
+                hintText: 'Search',
+              ),
+              onChanged: (value) {
+                setState(() {
+                });
+              },
+            )
+                : const Text('Teams'),
+            actions: [
+              IconButton(
+                icon: Icon(_isSearching ? Icons.close : Icons.search),
+                onPressed: () {
+                  setState(() {
+                    _isSearching = !_isSearching;
+                    if (!_isSearching) {
+                      _searchController.clear();
+                    }
+                  });
+                },
+              ),
+            ],
+          ),
             body: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -26,8 +61,7 @@ class TeamList extends StatelessWidget {
                   Expanded(
                     child: ListView.builder(
                     itemBuilder: (_, index) {
-                      var team = teamModel.teams[index];
-
+                      var team = teams[index];
                       var image = team.image64encode;
                       return ListTile(
                         leading: image != null
@@ -38,7 +72,6 @@ class TeamList extends StatelessWidget {
                               return CircularProgressIndicator();
                             }
                             var downloadURL = snapshot.data!;
-                            print('teams'+ downloadURL);
                             return CircleAvatar(radius: 20, backgroundImage: NetworkImage(downloadURL));
                           },
                         )
@@ -49,7 +82,7 @@ class TeamList extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => TeamDetails(
-                                team: teamModel.teams[index],
+                                team: teams[index],
                                 teamModel: teamModel,
                                 playerModel: Provider.of<PlayerModel>(context, listen: false),
                               ),
@@ -58,7 +91,7 @@ class TeamList extends StatelessWidget {
                         },
                       );
                     },
-                    itemCount: teamModel.teams.length
+                    itemCount: teams.length
                   )
                   )
                 ],
@@ -82,5 +115,16 @@ class TeamList extends StatelessWidget {
           );
         },
     );
+  }
+}
+
+class FullScreenText extends StatelessWidget {
+  final String text;
+
+  const FullScreenText({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Directionality(textDirection:TextDirection.ltr, child: Column(children: [ Expanded(child: Center(child: Text(text))) ]));
   }
 }
